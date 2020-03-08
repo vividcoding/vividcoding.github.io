@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://vividcoding.github.io/"/>
-  <updated>2020-03-08T09:35:05.825Z</updated>
+  <updated>2020-03-08T11:31:28.883Z</updated>
   <id>https://vividcoding.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>事件溯源：它是什么，为何这么厉害</title>
+    <link href="https://vividcoding.github.io/2020/03/08/Why-event-sourcing-so-incrediable/"/>
+    <id>https://vividcoding.github.io/2020/03/08/Why-event-sourcing-so-incrediable/</id>
+    <published>2020-03-08T11:21:18.000Z</published>
+    <updated>2020-03-08T11:31:28.883Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;现状&quot;&gt;&lt;a href=&quot;#现状&quot; class=&quot;headerlink&quot; title=&quot;现状&quot;&gt;&lt;/a&gt;现状&lt;/h2&gt;&lt;p&gt;在我们讨论事件溯源之前，先简单介绍一下web开发的现状。当前流行的web开发本质上是数据库驱动的。在设计Web应用最开始的阶段，一般会对业务
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>MySQL latin1 字符集引起的一个小问题分析</title>
