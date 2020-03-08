@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>书到用时方恨少，砖到搬时才知沉</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://lephp.github.io/"/>
+  <updated>2020-03-08T09:35:05.825Z</updated>
+  <id>https://lephp.github.io/</id>
+  
+  <author>
+    <name>Marlin</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MySQL latin1 字符集引起的一个小问题分析</title>
+    <link href="https://lephp.github.io/2018/09/02/A-small-tip-about-mysql-latin1-charset/"/>
+    <id>https://lephp.github.io/2018/09/02/A-small-tip-about-mysql-latin1-charset/</id>
+    <published>2018-09-01T18:06:06.000Z</published>
+    <updated>2020-03-08T09:35:05.825Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;神勇的latin1啥都能存，但是要慎用。&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>为什么使用INT型数据查询varchar字段会导致全表扫描</title>
+    <link href="https://lephp.github.io/2018/05/15/why-using-an-integer-to-select-varchar-cause-a-full-table-scan/"/>
+    <id>https://lephp.github.io/2018/05/15/why-using-an-integer-to-select-varchar-cause-a-full-table-scan/</id>
+    <published>2018-05-14T17:01:28.000Z</published>
+    <updated>2018-07-07T15:33:36.533Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一个简单的查询语句引发的血案。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="mysql 查询优化" scheme="https://lephp.github.io/tags/mysql-%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PHP7 FPM 启动源码分析&lt;一&gt;</title>
+    <link href="https://lephp.github.io/2017/05/26/PHP7-FPM-internels/"/>
+    <id>https://lephp.github.io/2017/05/26/PHP7-FPM-internels/</id>
+    <published>2017-05-26T02:32:48.000Z</published>
+    <updated>2018-07-07T15:33:36.527Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;从源码角度去分析 FPM 的启动步骤&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="php7 阅读源码" scheme="https://lephp.github.io/tags/php7-%E9%98%85%E8%AF%BB%E6%BA%90%E7%A0%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>按分组选出值最大的n行数据</title>
+    <link href="https://lephp.github.io/2017/05/18/select-max-top-n-rows-with-groupby/"/>
+    <id>https://lephp.github.io/2017/05/18/select-max-top-n-rows-with-groupby/</id>
+    <published>2017-05-18T01:42:32.000Z</published>
+    <updated>2018-07-07T15:33:36.529Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;介绍几种选出值最大的n行数据的方法&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="MySQL SQL groupby" scheme="https://lephp.github.io/tags/MySQL-SQL-groupby/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTTP POST 表单提交方式介绍</title>
+    <link href="https://lephp.github.io/2017/05/17/http-post-methods-comparison/"/>
+    <id>https://lephp.github.io/2017/05/17/http-post-methods-comparison/</id>
+    <published>2017-05-17T15:14:17.000Z</published>
+    <updated>2018-07-07T15:33:36.528Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;为客户端提供接口的时候，发现客户端对于 http 接口的调用方式不是很清楚，介绍 HTTP POST 请求的几种常用的 Content-Type。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="http" scheme="https://lephp.github.io/tags/http/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2017 面试记录</title>
+    <link href="https://lephp.github.io/2017/05/17/2017-interviews/"/>
+    <id>https://lephp.github.io/2017/05/17/2017-interviews/</id>
+    <published>2017-05-17T10:47:08.000Z</published>
+    <updated>2018-07-07T15:33:36.525Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;找工作呀找工作…&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="interviews" scheme="https://lephp.github.io/tags/interviews/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OPCache 工作机制</title>
+    <link href="https://lephp.github.io/2016/12/18/things-about-opcache/"/>
+    <id>https://lephp.github.io/2016/12/18/things-about-opcache/</id>
+    <published>2016-12-18T13:47:46.000Z</published>
+    <updated>2018-07-07T15:33:36.531Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;基于 PHP7 源码分析 opcache 内部工作机制&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="opcache php optimization" scheme="https://lephp.github.io/tags/opcache-php-optimization/"/>
+    
+  </entry>
+  
+</feed>
