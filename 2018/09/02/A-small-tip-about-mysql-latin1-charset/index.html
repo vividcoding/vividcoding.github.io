@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>MySQL latin1 字符集引起的一个小问题分析 | 书到用时方恨少，砖到搬时才知沉</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.4.0/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">MySQL latin1 字符集引起的一个小问题分析</h1><a id="logo" href="/.">书到用时方恨少，砖到搬时才知沉</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">MySQL latin1 字符集引起的一个小问题分析</h1><div class="post-meta">Sep 2, 2018</div><div class="post-content"><p>神勇的latin1啥都能存，但是要慎用。<br><a id="more"></a></p>
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><h3 id="DDL"><a href="#DDL" class="headerlink" title="DDL"></a>DDL</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`t_articles`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`article_id`</span> <span class="built_in">varchar</span>(<span class="number">14</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`sub_category_cn`</span> <span class="built_in">varchar</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`idx_article_id`</span> (<span class="string">`article_id`</span>)</span><br><span class="line">  ) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=latin1</span><br></pre></td></tr></table></figure>
+<h3 id="一条插入操作"><a href="#一条插入操作" class="headerlink" title="一条插入操作"></a>一条插入操作</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="string">`t_articles`</span> (<span class="string">'article_id'</span>, <span class="string">`sub_category_cn`</span>) <span class="keyword">values</span> (<span class="string">"20180830012203"</span>, <span class="string">"海鸟和鱼相爱，只是一场意外。"</span>);</span><br></pre></td></tr></table></figure>
+<p>插入的结果可能有两种，一种是如下：</p>
+<table>
+<thead>
+<tr>
+<th>article_id</th>
+<th>sub_category_cn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20180830012203</td>
+<td>海鸟和鱼相爱，只是一x</td>
+</tr>
+</tbody>
+</table>
+<p>另一种是直接报错，无法插入。</p>
+<h3 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h3><p>原因大概率是因为<code>sub_category_cn</code>字段类型是varchar，varchar(32)能存储32个字符，超过32个字符的部分会被截断，而如果连接采用了<code>strict=true</code>严格模式则插入会直接报错。那么问题来了：</p>
+<blockquote>
+<p><strong>“海鸟和鱼相爱，只是一场意外。”这句话带上标点符号也没有超过32个字，为什么会被截断？海鸟和鱼相爱到底是不是意外？</strong></p>
+</blockquote>
+<p>看看<code>latin1</code> 字符集对于数据的处理方式：</p>
+<blockquote>
+<p>ISO/IEC 8859-1:1998, Information technology — 8-bit single-byte coded graphic character sets</p>
+</blockquote>
+<p>参考维基百科中对于这个标准的阐述可以明确，Latin1编码格式中，每个字符占8bit，也就是一个字节。而utf8编码规则也很简单：</p>
+<p>1）对于单字节的符号，字节的第一位设为0，后面7位为这个符号的 Unicode 码。因此对于英语字母，UTF-8 编码和 ASCII 码是相同的。</p>
+<p>2）对于n字节的符号（n &gt; 1），第一个字节的前n位都设为1，第n + 1位设为0，后面字节的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的 Unicode 码。</p>
+<table>
+<thead>
+<tr>
+<th>Unicode符号范围</th>
+<th>UTF-8编码方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0000 0000-0000 007F</td>
+<td>0xxxxxxx</td>
+</tr>
+<tr>
+<td>0000 0080-0000 07FF</td>
+<td>110xxxxx 10xxxxxx</td>
+</tr>
+<tr>
+<td>0000 0800-0000 FFFF</td>
+<td>1110xxxx 10xxxxxx 10xxxxxx</td>
+</tr>
+<tr>
+<td>0001 0000-0010 FFFF</td>
+<td>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</td>
+</tr>
+</tbody>
+</table>
+<p>到这里，大概能猜到<code>latin1</code>作为连接字符集时 MySQL<code>varchar</code>类型对于字符长度计算方式了.</p>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">names</span> latin1;</span><br></pre></td></tr></table></figure>
+<p>告诉 MySQL 所有的 SQL 语句会以 latin1 字符集发送给服务端，请服务端按照 latin1 的方式进行解析。因此，当一个 UTF8 编码的汉字被发送过去时，实际上 MySQL 会把二进制的每8位当做一个字符来处理，而不是用 utf8 编码的方式去解析头八位看这个字符有几个字节。因此最终的结果是每个汉字会被当做3~4个字符来处理。</p>
+<p>接下来做个简单的实验：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 终端编码为utf8，连接字符集为 latin1</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">names</span> latin1;</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">char_length</span>(<span class="string">"海鸟海鸟"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>result:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+------------------------+</span><br><span class="line">| char_length(&quot;海鸟海鸟&quot;) |</span><br><span class="line">|                     12 |</span><br><span class="line">+------------------------+</span><br></pre></td></tr></table></figure>
+<p>采用 <code>set names latin1</code> 作为连接字符集，计算出来的<code>UTF8</code>编码的字符长度为 3*4=12。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 终端编码为utf8，连接字符集为 utf8</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">names</span> latin1;</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">char_length</span>(<span class="string">"海鸟海鸟"</span>);</span><br></pre></td></tr></table></figure>
+<p>result:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+------------------------+</span><br><span class="line">| char_length(&quot;海鸟海鸟&quot;) |</span><br><span class="line">|                     4  |</span><br><span class="line">+------------------------+</span><br></pre></td></tr></table></figure>
+<p>采用 <code>set names utf8;</code> 作为连接字符集，计算出来的<code>UTF8</code>编码的字符长度为 4，符合预期。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>如果不用strict模式可能发现不了这个问题；</li>
+<li>设计mysql表需要考虑的问题很多，字符集的选择就是一个很重要又很容易被忽视的点。</li>
+</ol>
+<p>看起来<code>latin1</code>对于字符串存储可以说是万能的，因为它单字节处理的方式可以让多字节编码也可以被正常存入数据库。在近几年的工作实践中经常会遇到为了存储emoji表情需要改造数据表的字符集的情况，大多数方案都是改为<code>utf8mb4</code>这种字符编码，它是utf8的扩充，能兼容utf8。而实际上<code>latin1</code>也是可以存储emoji表情的，不知道有没有团队踩过坑？</p>
+<p>听说世界上有10种人，一种是懂二进制的，一种是不懂二进制的。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://zh.wikipedia.org/wiki/UTF-8" target="_blank" rel="noopener">维基百科:UTF-8</a></li>
+<li><a href="https://en.wikipedia.org/wiki/ISO/IEC_8859-1" target="_blank" rel="noopener">维基百科:ISO/IEC 8859-1</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/5.7/en/charset-we-sets.html" target="_blank" rel="noopener">MySQL 5.7 Reference Manual: West European Character Sets</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/5.7/en/char.html" target="_blank" rel="noopener">MySQL 5.7 Reference Manual: The CHAR and VARCHAR Types</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html" target="_blank" rel="noopener">阮一峰的网络日志：字符编码笔记：ASCII，Unicode 和 UTF-8</a></li>
+</ul>
+</div><div class="tags"></div><div class="post-nav"><a class="next" href="/2018/05/15/why-using-an-integer-to-select-varchar-cause-a-full-table-scan/">为什么使用INT型数据查询varchar字段会导致全表扫描</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://vividcoding.github.io"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/interviews/" style="font-size: 15px;">interviews</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/mysql-查询优化/" style="font-size: 15px;">mysql 查询优化</a> <a href="/tags/MySQL-SQL-groupby/" style="font-size: 15px;">MySQL SQL groupby</a> <a href="/tags/php7-阅读源码/" style="font-size: 15px;">php7 阅读源码</a> <a href="/tags/opcache-php-optimization/" style="font-size: 15px;">opcache php optimization</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/09/02/A-small-tip-about-mysql-latin1-charset/">MySQL latin1 字符集引起的一个小问题分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/15/why-using-an-integer-to-select-varchar-cause-a-full-table-scan/">为什么使用INT型数据查询varchar字段会导致全表扫描</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/PHP7-FPM-internels/">PHP7 FPM 启动源码分析<一></a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/select-max-top-n-rows-with-groupby/">按分组选出值最大的n行数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/17/http-post-methods-comparison/">HTTP POST 表单提交方式介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/17/2017-interviews/">2017 面试记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/18/things-about-opcache/">OPCache 工作机制</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">书到用时方恨少，砖到搬时才知沉.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

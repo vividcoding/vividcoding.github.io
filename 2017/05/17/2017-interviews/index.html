@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>2017 面试记录 | 书到用时方恨少，砖到搬时才知沉</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.4.0/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">2017 面试记录</h1><a id="logo" href="/.">书到用时方恨少，砖到搬时才知沉</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">2017 面试记录</h1><div class="post-meta">May 17, 2017</div><div class="post-content"><p>找工作呀找工作…<br><a id="more"></a></p>
+<h2 id="今日头条"><a href="#今日头条" class="headerlink" title="今日头条"></a>今日头条</h2><p>头条工作环境确实不错，约的上午10点半，前台安排到一个面试间，然后等了大概20分钟左右面试官来了，看起来挺技术范儿的一哥们儿。</p>
+<h3 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h3><p>一面主要讲了一些项目上的经历，让挑一个自己觉得不错的项目讲了一下，挑的是在微博做的一个项目，然后里面因为提到做了一些性能优化的事情，就深入问了一些数据库优化方面的知识，结合一些具体的应用场景，比如大的报表导出的性能优化方向，主要就是一些索引的选择、联表查询的优化上。然后问了一下<strong>B+树和SQL执行的过程</strong>，没好好准备，答的比较粗。</p>
+<p>然后就是另外一个并发量比较高的项目，介绍了整个性能优化的过程，这一块因为是去年底刚刚做的，所以记忆还比较深刻。在提到opcache的时候顺带把自己写的opcache源码分析给面试官看了一下，应该印象还不错，面试官也发表了一些自己的看法。然后他对我们使用PHP7还比较惊讶。</p>
+<p>最后面试官让写了一道算法题，两个有序数组的合并。刚开始有点紧张，不过后来在纸上写出来了，常考不难的题目。</p>
+<ul>
+<li>redis+mysql 的数据一致性问题怎么解决</li>
+<li>B+树</li>
+<li>SQL 执行过程</li>
+<li>数据库性能优化</li>
+<li>对 MVC 分层的理解，对设计模式的使用</li>
+</ul>
+<h3 id="二面"><a href="#二面" class="headerlink" title="二面"></a>二面</h3><p>二面的面试官好像不太看我的简历上的东西了，主要出了下面几个题目：</p>
+<ul>
+<li>手写SQL, 查询每个店铺最贵的N个商品，降序排列</li>
+<li>MySQL 性能优化的方法，涉及 SQL 执行过程分析，Explain 结果分析，还出了个SQL语句问有没有用到索引</li>
+<li>算法题：全排列，用递归写了，然后要求用非递归实现</li>
+<li>数据库的四种隔离级别</li>
+<li>数据库锁的原理，SELECT … FOR UPDATE 和 SELECT … 的区别，上的什么锁，锁之间的互斥关系</li>
+<li>varchar(50) int(4) char(50) 里面数字分别的含义</li>
+<li>解释脏读、幻读</li>
+<li>PHP 生命周期</li>
+<li>Top 命令各项数据的解释</li>
+<li>socket 建立连接每一步的客户端和服务端状态</li>
+<li>syn 泛洪攻击</li>
+<li>opcache 缓存过期策略</li>
+<li>redis 的事务</li>
+</ul>
+<p>通过头条这次面试还是能发现很多薄弱环节，对一些知识的理解浮于表面，没有深入去细看，所以导致有些问题答的比较犹豫、粗，接下来还是认真去怼一些应该知道的东西的细节，不能太浮躁，知识积累是很漫长的过程，像数据库的一些细节是需要深入了解细节才能加深理解的，实际使用的过程中虽然看起来没有遇到问题，但是只要流量大了，很多细节不注意就会被放大到影响业务的正常运转。</p>
+<p>另外一个问题是自己的表达能力还是很欠缺的，很多问题我其实想的挺清楚，但是表达起来语言组织能力感觉很差，容易让面试官听不懂，不知道是不是太紧张的原因。</p>
+<h2 id="美图"><a href="#美图" class="headerlink" title="美图"></a>美图</h2><p>美图北京在搜狐网络大厦，不错的写字楼，高峰期电梯也没有特别的多人。</p>
+<h3 id="笔试题"><a href="#笔试题" class="headerlink" title="笔试题"></a>笔试题</h3><p>笔试题比较少，就5道题</p>
+<ul>
+<li>观察者模式（对象属性变化通知）</li>
+<li>global 的使用</li>
+<li>缓存被击穿了，怎么办</li>
+<li>设计日志收集系统</li>
+<li>设计大型文章推荐系统架构</li>
+</ul>
+<h3 id="面试问题"><a href="#面试问题" class="headerlink" title="面试问题"></a>面试问题</h3><ul>
+<li>PSR4 与 PSR0 区别</li>
+<li>autoload 和 spl_autoload 的区别</li>
+</ul>
+<h3 id="面经"><a href="#面经" class="headerlink" title="面经"></a>面经</h3><p>聊的基本都是上面的问题，问题也比较开放，我自己还是老问题依然存在：知识点没吃透。具体一点的话，对设计模式的理解和运用还不熟练，对于缓存和落地之间的配合和紧急故障处理的方式上回答的也不够果断和富有经验。不过面试官也比较直白的说了我还是缺乏大型项目经验，再加上我的期望薪资写的比较高，确实是很高，不过我心里是给他们砍价的空间的，连砍价都不砍，那估计是真的太高了吧。一面挂，没啥更多的可以说，认真结合自己的情况和职业发展的期望分析，还是希望接下来能够有机会去 BAT 这种平台多磨练两年。继续加油吧！</p>
+</div><div class="tags"><a href="/tags/interviews/">interviews</a></div><div class="post-nav"><a class="pre" href="/2017/05/17/http-post-methods-comparison/">HTTP POST 表单提交方式介绍</a><a class="next" href="/2016/12/18/things-about-opcache/">OPCache 工作机制</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://vividcoding.github.io"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/interviews/" style="font-size: 15px;">interviews</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/mysql-查询优化/" style="font-size: 15px;">mysql 查询优化</a> <a href="/tags/MySQL-SQL-groupby/" style="font-size: 15px;">MySQL SQL groupby</a> <a href="/tags/php7-阅读源码/" style="font-size: 15px;">php7 阅读源码</a> <a href="/tags/opcache-php-optimization/" style="font-size: 15px;">opcache php optimization</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/09/02/A-small-tip-about-mysql-latin1-charset/">MySQL latin1 字符集引起的一个小问题分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/15/why-using-an-integer-to-select-varchar-cause-a-full-table-scan/">为什么使用INT型数据查询varchar字段会导致全表扫描</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/PHP7-FPM-internels/">PHP7 FPM 启动源码分析<一></a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/select-max-top-n-rows-with-groupby/">按分组选出值最大的n行数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/17/http-post-methods-comparison/">HTTP POST 表单提交方式介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/17/2017-interviews/">2017 面试记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/18/things-about-opcache/">OPCache 工作机制</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">书到用时方恨少，砖到搬时才知沉.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
