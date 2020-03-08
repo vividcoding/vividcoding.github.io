@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://lephp.github.io/"/>
+  <link href="https://vividcoding.github.io/"/>
   <updated>2020-03-08T09:35:05.825Z</updated>
-  <id>https://lephp.github.io/</id>
+  <id>https://vividcoding.github.io/</id>
   
   <author>
     <name>Marlin</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>MySQL latin1 字符集引起的一个小问题分析</title>
-    <link href="https://lephp.github.io/2018/09/02/A-small-tip-about-mysql-latin1-charset/"/>
-    <id>https://lephp.github.io/2018/09/02/A-small-tip-about-mysql-latin1-charset/</id>
+    <link href="https://vividcoding.github.io/2018/09/02/A-small-tip-about-mysql-latin1-charset/"/>
+    <id>https://vividcoding.github.io/2018/09/02/A-small-tip-about-mysql-latin1-charset/</id>
     <published>2018-09-01T18:06:06.000Z</published>
     <updated>2020-03-08T09:35:05.825Z</updated>
     
@@ -34,8 +34,8 @@
   
   <entry>
     <title>为什么使用INT型数据查询varchar字段会导致全表扫描</title>
-    <link href="https://lephp.github.io/2018/05/15/why-using-an-integer-to-select-varchar-cause-a-full-table-scan/"/>
-    <id>https://lephp.github.io/2018/05/15/why-using-an-integer-to-select-varchar-cause-a-full-table-scan/</id>
+    <link href="https://vividcoding.github.io/2018/05/15/why-using-an-integer-to-select-varchar-cause-a-full-table-scan/"/>
+    <id>https://vividcoding.github.io/2018/05/15/why-using-an-integer-to-select-varchar-cause-a-full-table-scan/</id>
     <published>2018-05-14T17:01:28.000Z</published>
     <updated>2018-07-07T15:33:36.533Z</updated>
     
@@ -46,14 +46,14 @@
     </summary>
     
     
-      <category term="mysql 查询优化" scheme="https://lephp.github.io/tags/mysql-%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/"/>
+      <category term="mysql 查询优化" scheme="https://vividcoding.github.io/tags/mysql-%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
   <entry>
     <title>PHP7 FPM 启动源码分析&lt;一&gt;</title>
-    <link href="https://lephp.github.io/2017/05/26/PHP7-FPM-internels/"/>
-    <id>https://lephp.github.io/2017/05/26/PHP7-FPM-internels/</id>
+    <link href="https://vividcoding.github.io/2017/05/26/PHP7-FPM-internels/"/>
+    <id>https://vividcoding.github.io/2017/05/26/PHP7-FPM-internels/</id>
     <published>2017-05-26T02:32:48.000Z</published>
     <updated>2018-07-07T15:33:36.527Z</updated>
     
@@ -64,14 +64,14 @@
     </summary>
     
     
-      <category term="php7 阅读源码" scheme="https://lephp.github.io/tags/php7-%E9%98%85%E8%AF%BB%E6%BA%90%E7%A0%81/"/>
+      <category term="php7 阅读源码" scheme="https://vividcoding.github.io/tags/php7-%E9%98%85%E8%AF%BB%E6%BA%90%E7%A0%81/"/>
     
   </entry>
   
   <entry>
     <title>按分组选出值最大的n行数据</title>
-    <link href="https://lephp.github.io/2017/05/18/select-max-top-n-rows-with-groupby/"/>
-    <id>https://lephp.github.io/2017/05/18/select-max-top-n-rows-with-groupby/</id>
+    <link href="https://vividcoding.github.io/2017/05/18/select-max-top-n-rows-with-groupby/"/>
+    <id>https://vividcoding.github.io/2017/05/18/select-max-top-n-rows-with-groupby/</id>
     <published>2017-05-18T01:42:32.000Z</published>
     <updated>2018-07-07T15:33:36.529Z</updated>
     
@@ -82,14 +82,14 @@
     </summary>
     
     
-      <category term="MySQL SQL groupby" scheme="https://lephp.github.io/tags/MySQL-SQL-groupby/"/>
+      <category term="MySQL SQL groupby" scheme="https://vividcoding.github.io/tags/MySQL-SQL-groupby/"/>
     
   </entry>
   
   <entry>
     <title>HTTP POST 表单提交方式介绍</title>
-    <link href="https://lephp.github.io/2017/05/17/http-post-methods-comparison/"/>
-    <id>https://lephp.github.io/2017/05/17/http-post-methods-comparison/</id>
+    <link href="https://vividcoding.github.io/2017/05/17/http-post-methods-comparison/"/>
+    <id>https://vividcoding.github.io/2017/05/17/http-post-methods-comparison/</id>
     <published>2017-05-17T15:14:17.000Z</published>
     <updated>2018-07-07T15:33:36.528Z</updated>
     
@@ -100,14 +100,14 @@
     </summary>
     
     
-      <category term="http" scheme="https://lephp.github.io/tags/http/"/>
+      <category term="http" scheme="https://vividcoding.github.io/tags/http/"/>
     
   </entry>
   
   <entry>
     <title>2017 面试记录</title>
-    <link href="https://lephp.github.io/2017/05/17/2017-interviews/"/>
-    <id>https://lephp.github.io/2017/05/17/2017-interviews/</id>
+    <link href="https://vividcoding.github.io/2017/05/17/2017-interviews/"/>
+    <id>https://vividcoding.github.io/2017/05/17/2017-interviews/</id>
     <published>2017-05-17T10:47:08.000Z</published>
     <updated>2018-07-07T15:33:36.525Z</updated>
     
@@ -118,14 +118,14 @@
     </summary>
     
     
-      <category term="interviews" scheme="https://lephp.github.io/tags/interviews/"/>
+      <category term="interviews" scheme="https://vividcoding.github.io/tags/interviews/"/>
     
   </entry>
   
   <entry>
     <title>OPCache 工作机制</title>
-    <link href="https://lephp.github.io/2016/12/18/things-about-opcache/"/>
-    <id>https://lephp.github.io/2016/12/18/things-about-opcache/</id>
+    <link href="https://vividcoding.github.io/2016/12/18/things-about-opcache/"/>
+    <id>https://vividcoding.github.io/2016/12/18/things-about-opcache/</id>
     <published>2016-12-18T13:47:46.000Z</published>
     <updated>2018-07-07T15:33:36.531Z</updated>
     
@@ -136,7 +136,7 @@
     </summary>
     
     
-      <category term="opcache php optimization" scheme="https://lephp.github.io/tags/opcache-php-optimization/"/>
+      <category term="opcache php optimization" scheme="https://vividcoding.github.io/tags/opcache-php-optimization/"/>
     
   </entry>
   
